@@ -1,9 +1,10 @@
 // Importar Hooks de UseState y UseEffect
-import { useEffect, useState } from "react"
+import { use, useEffect, useState } from "react"
 
 // Importar componentes de React
 import Header from "./Components/Header"
 import Guitar from "./Components/Guitar"
+import { db } from "./data/db"
 
 // Componentes de React
 // Son funciones que poseen HTML y JS en un solo archivo
@@ -47,16 +48,22 @@ function App() {
     // }, 2000)
 
     // Crear useEffect
-    const [auth, setAuth] = useState(false)
-    useEffect(() => {
-        if(auth) {
-            console.log("El componente se ha renderizado y escuchando auth")
-        }
-    }, [auth])
+    // const [auth, setAuth] = useState(false)
+    // useEffect(() => {
+    //     if(auth) {
+    //         console.log("El componente se ha renderizado y escuchando auth")
+    //     }
+    // }, [auth])
 
-    setTimeout(() => {
-        setAuth(true)
-    }, 2000)
+    // setTimeout(() => {
+    //     setAuth(true)
+    // }, 2000)
+
+    // Obtener datos de la base de datos
+    const [data, setData] = useState(db)
+    // useEffect(() => {
+    //     setData(db)
+    // }, [])
 
     return (
         <>
