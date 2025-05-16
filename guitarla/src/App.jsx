@@ -34,7 +34,7 @@ import { db } from "./data/db"
 // Statements
 // Cada statement es una instrucción para hacer algo (cada línea de código)
 // Los statements se ejecutan de forma secuencial
-// Algunos statements con: creación de variables, funciones, clases, condicionales, ciclos, etc.
+// Algunos statements son: creación de variables, funciones, clases, condicionales, ciclos, etc.
 
 // Expressions
 // Son algo que produce un valor
@@ -44,6 +44,11 @@ import { db } from "./data/db"
 // Los componentes de React utilizan Props para comunicarse entre ellos
 // El componente padre le pasa información al hijo a través de ellos, no al revés
 // Son similares a los atributos de HTML, pero pueden recibir arrays, objetos, funciones, etc.
+
+// Eventos
+// Los eventos son acciones que suceden en el navegador y reaccionan a una acción del usuario
+// Son camelCase, es decir, en lugar de onclick se escribe onClick
+// A diferencia de HTML y JS, donde se coloca el nombre de la función en un string en React se utiliza la función entre llaves
 
 function App() {
 
