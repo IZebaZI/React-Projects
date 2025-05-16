@@ -6,12 +6,12 @@ import Header from "./Components/Header"
 import Guitar from "./Components/Guitar"
 import { db } from "./data/db"
 
-// Componentes de React
+// Componentes
 // Son funciones que poseen HTML y JS en un solo archivo
 // Retornan lo que se va a renderizar en el navegador
 // Su proposito es ser reutilizables y encapsular la logica de cada uno
 
-// Hooks de React
+// Hooks
 // Permiten utilizar diferentes funciones de React en los componentes
 // Se dividen entre básicos y adicionales
 // Es posible crear hooks personalizados
@@ -20,16 +20,25 @@ import { db } from "./data/db"
 // Se colocan en la parte superior del componente
 // No de deben colocar dentro de condicionales, bucles o funciones
 
-// State en React
+// State
 // Es una variable con información relevente en nuestra aplicación
 // Puede pertenecer a un componente o a toda la aplicación
 // Se puede modificar y React se encarga de actualizar el DOM y renderizar la vista
 
-// Effect en React
+// Effect
 // Siempre es un callback, que dependiendo cómo se declare, va a ejecutar diferentes acciones
 // Se ejecuta después de que el componente se haya renderizado
 // Es posible pasarle una dependencia y escuchar los cambios que sucedan en una variable
 // Se puede usar para hacer peticiones a una API, escuchar eventos, etc.
+
+// Statements
+// Cada statement es una instrucción para hacer algo (cada línea de código)
+// Los statements se ejecutan de forma secuencial
+// Algunos statements con: creación de variables, funciones, clases, condicionales, ciclos, etc.
+
+// Expressions
+// Son algo que produce un valor
+// Algunos ejemplos son: un ternario, un array method, etc.
 
 function App() {
 
@@ -73,8 +82,11 @@ function App() {
         <main className="container-xl mt-5">
             <h2 className="text-center">Nuestra Colección</h2>
             <div className="row mt-5">
+                {/* Mapear las guitarras */}
+                {data.map(() => (
+                    <Guitar/>
+                ))}
                 {/* Importar Guitar */}
-                <Guitar/>
             </div>
         </main>
 
