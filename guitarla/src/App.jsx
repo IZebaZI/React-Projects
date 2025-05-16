@@ -40,6 +40,11 @@ import { db } from "./data/db"
 // Son algo que produce un valor
 // Algunos ejemplos son: un ternario, un array method, etc.
 
+// Props
+// Los componentes de React utilizan Props para comunicarse entre ellos
+// El componente padre le pasa información al hijo a través de ellos, no al revés
+// Son similares a los atributos de HTML, pero pueden recibir arrays, objetos, funciones, etc.
+
 function App() {
 
     // Crear useState
@@ -83,8 +88,11 @@ function App() {
             <h2 className="text-center">Nuestra Colección</h2>
             <div className="row mt-5">
                 {/* Mapear las guitarras */}
-                {data.map(() => (
-                    <Guitar/>
+                {data.map((guitar) => (
+                    <Guitar
+                        key={guitar.id}
+                        guitar={guitar}
+                    />
                 ))}
                 {/* Importar Guitar */}
             </div>
