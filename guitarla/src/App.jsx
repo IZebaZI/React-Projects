@@ -107,11 +107,17 @@ function App() {
         
     }
 
+    function removeFromCart(id){
+        // console.log('Eliminando', id)
+        setCart(prevCart => prevCart.filter(item => item.id !== id))
+    }
+
     return (
         <>
         {/* Importar Header */}
         <Header
             cart={cart}
+            removeFromCart = {removeFromCart}
         />
     
         <main className="container-xl mt-5">

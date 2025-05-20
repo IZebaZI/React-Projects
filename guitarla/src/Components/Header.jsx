@@ -5,19 +5,19 @@ import { useMemo } from "react"
 // Se usa para evitar cálculos innecesarios
 
 // Creación de un componente Header
-export default function Header(cart) {
+export default function Header({cart, removeFromCart}) { // Destructuring de los parámetros en la función
     // JSX
     // Es un lenguaje de plantillas que muestra HTML pero tiene la capacidad de usar JS
     // Permite usar variables, funciones, etc.
     // const name = "GuitarLA"
 
     // State Derivado
-    // const isEmpty = () => cart.cart.length === 0
-    // const cartTotal = () => cart.cart.reduce((total, item) => total + (item.quantity * item.price), 0)
+    // const isEmpty = () => cart.length === 0
+    // const cartTotal = () => cart.reduce((total, item) => total + (item.quantity * item.price), 0)
 
     // useMemo
-    const isEmpty = useMemo(() => cart.cart.length === 0, [cart])
-    const cartTotal = useMemo(() => cart.cart.reduce((total, item) => total + (item.quantity * item.price), 0), [cart])
+    const isEmpty = useMemo(() => cart.length === 0, [cart])
+    const cartTotal = useMemo(() => cart.reduce((total, item) => total + (item.quantity * item.price), 0), [cart])
 
     return (
         // Para usar elementos de JS en HTML se usa {}
@@ -58,7 +58,7 @@ export default function Header(cart) {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {cart.cart.map(item => (
+                                                {cart.map(item => (
                                                     <tr key={item.id}>
                                                         <td>
                                                             <img className="img-fluid" src={`/img/${item.image}.jpg`} alt="imagen guitarra" />
@@ -86,6 +86,7 @@ export default function Header(cart) {
                                                             <button
                                                                 className="btn btn-danger"
                                                                 type="button"
+                                                                onClick={() => removeFromCart(item.id)}
                                                             >
                                                                 X
                                                             </button>
