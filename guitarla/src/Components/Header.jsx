@@ -1,4 +1,8 @@
 import { Fragment } from "react"
+// Importar useMemo
+import { useMemo } from "react"
+// useMemo es un hook que permite memorizar el resultado de una función y mejorar el rendimiento de la aplicación
+// Se usa para evitar cálculos innecesarios
 
 // Creación de un componente Header
 export default function Header(cart) {
@@ -8,8 +12,12 @@ export default function Header(cart) {
     // const name = "GuitarLA"
 
     // State Derivado
-    const isEmpty = () => cart.cart.length === 0
-    const cartTotal = () => cart.cart.reduce((total, item) => total + (item.quantity * item.price), 0)
+    // const isEmpty = () => cart.cart.length === 0
+    // const cartTotal = () => cart.cart.reduce((total, item) => total + (item.quantity * item.price), 0)
+
+    // useMemo
+    const isEmpty = useMemo(() => cart.cart.length === 0, [cart])
+    const cartTotal = useMemo(() => cart.cart.reduce((total, item) => total + (item.quantity * item.price), 0), [cart])
 
     return (
         // Para usar elementos de JS en HTML se usa {}
@@ -34,7 +42,7 @@ export default function Header(cart) {
                         >
                             <img className="img-fluid" src="./public/img/carrito.png" alt="imagen carrito" />
                             <div id="carrito" className="bg-white p-3">
-                                {isEmpty() ? (
+                                {isEmpty ? (
                                     <p className="text-center">El carrito esta vacio</p>
 
                                 ) : (
@@ -86,7 +94,7 @@ export default function Header(cart) {
                                                 ))}
                                             </tbody>
                                         </table>
-                                        <p className="text-end">Total pagar: <span className="fw-bold">${cartTotal()}</span></p>
+                                        <p className="text-end">Total pagar: <span className="fw-bold">${cartTotal}</span></p>
                                         <button className="btn btn-dark w-100 mt-3 p-2">Vaciar Carrito</button>
                                     </>
                                 )}
