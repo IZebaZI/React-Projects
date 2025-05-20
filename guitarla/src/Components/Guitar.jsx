@@ -2,12 +2,13 @@
 // Creación de un componente para mostrar cada guitarra
 // Acceder a los props con el parametro props
 // También se puede acceder a los props con destructuring {nombre_objeto}
-export default function Guitar({guitar}) {
+export default function Guitar({guitar, addToCart}) {
 
     const {id, name, image, description, price} = guitar
-    const handleClick = (id) => {
-        console.log(id)
-    }
+    // const handleClick = (id) => {
+    //     setCart([...cart, guitar])
+    //     console.log(cart)
+    // }
 
     return (
         <div className="col-md-6 col-lg-4 my-4 row align-items-center">
@@ -22,7 +23,11 @@ export default function Guitar({guitar}) {
                     type="button"
                     className="btn btn-dark w-100"
                     // Registrar evento
-                    onClick={() => handleClick(guitar)}
+                    // prevCart: es el valor anterior del carrito
+                    // setCart: es la función que actualiza el carrito
+                    // setCart siempre conoce el valor anerior de la variable cart
+                    // onClick={() => setCart(prevCart => [...prevCart, guitar])}
+                    onClick={() => addToCart(guitar)}
                 >Agregar al Carrito</button>
             </div>
         </div>

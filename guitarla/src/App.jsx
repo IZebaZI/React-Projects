@@ -84,6 +84,29 @@ function App() {
     //     setData(db)
     // }, [])
 
+    // State para el carrito
+    const [cart, setCart] = useState([])
+
+    function addToCart(item){
+        const itemExists = cart.findIndex(guitar => guitar.id === item.id)
+        // console.log(itemExists)
+        if (itemExists >= 0) {
+            // Si existe, no se agrega al carrito, se aumenta la cantidad
+            const updatedCart = [...cart]
+            updatedCart[itemExists].quantity ++
+            setCart(updatedCart)
+            console.log("Ya existe en el carrito")
+        } else {
+            // Se agrega la propiedad quantity al objeto
+            item.quantity = 1
+            // Si no existe, se agrega al carrito
+            console.log("No existe... agregando al carrito...")
+            // setCart(prevCart => [...prevCart, item])
+            setCart([...cart, item])
+        }
+        
+    }
+
     return (
         <>
         {/* Importar Header */}
@@ -97,6 +120,9 @@ function App() {
                     <Guitar
                         key={guitar.id}
                         guitar={guitar}
+                        // cart={cart}
+                        // setCart={setCart}
+                        addToCart={addToCart}
                     />
                 ))}
                 {/* Importar Guitar */}
