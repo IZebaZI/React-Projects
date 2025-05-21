@@ -5,7 +5,7 @@ import { useMemo } from "react"
 // Se usa para evitar cálculos innecesarios
 
 // Creación de un componente Header
-export default function Header({cart, removeFromCart}) { // Destructuring de los parámetros en la función
+export default function Header({cart, removeFromCart, increaseQuantity, decreaseQuantity}) { // Destructuring de los parámetros en la función
     // JSX
     // Es un lenguaje de plantillas que muestra HTML pero tiene la capacidad de usar JS
     // Permite usar variables, funciones, etc.
@@ -71,6 +71,7 @@ export default function Header({cart, removeFromCart}) { // Destructuring de los
                                                             <button
                                                                 type="button"
                                                                 className="btn btn-dark"
+                                                                onClick={() => decreaseQuantity(item.id)}
                                                             >
                                                                 -
                                                             </button>
@@ -78,6 +79,7 @@ export default function Header({cart, removeFromCart}) { // Destructuring de los
                                                             <button
                                                                 type="button"
                                                                 className="btn btn-dark"
+                                                                onClick={() => increaseQuantity(item.id)}
                                                             >
                                                                 +
                                                             </button>

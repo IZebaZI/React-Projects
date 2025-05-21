@@ -92,6 +92,7 @@ function App() {
         // console.log(itemExists)
         if (itemExists >= 0) {
             // Si existe, no se agrega al carrito, se aumenta la cantidad
+            if (cart[itemExists].quantity >= 5) return
             const updatedCart = [...cart]
             updatedCart[itemExists].quantity ++
             setCart(updatedCart)
@@ -112,12 +113,40 @@ function App() {
         setCart(prevCart => prevCart.filter(item => item.id !== id))
     }
 
+    function increaseQuantity(id){
+        const updatedCart = cart.map(item => {
+            if(item.id === id && item.quantity < 5){
+                return {
+                    ...item,
+                    quantity: item.quantity + 1
+                }
+            }
+            return item
+        })
+        setCart(updatedCart)
+    }
+
+    function decreaseQuantity(id){
+        const updatedCart = cart.map(item => {
+            if(item.id === id && item.quantity > 1){
+                return {
+                    ...item,
+                    quantity: item.quantity - 1
+                }
+            }
+            return item
+        })
+        setCart(updatedCart)
+    }
+
     return (
         <>
         {/* Importar Header */}
         <Header
             cart={cart}
             removeFromCart = {removeFromCart}
+            increaseQuantity = {increaseQuantity}
+            decreaseQuantity = {decreaseQuantity}
         />
     
         <main className="container-xl mt-5">
