@@ -1,10 +1,10 @@
 // Importar Hooks de UseState y UseEffect
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 // Importar componentes de React
 import Header from "./Components/Header"
 import Guitar from "./Components/Guitar"
-import { db } from "./data/db"
+import { useCart } from "./hooks/useCart"
 
 // Componentes
 // Son funciones que poseen HTML y JS en un solo archivo
@@ -50,8 +50,12 @@ import { db } from "./data/db"
 // Son camelCase, es decir, en lugar de onclick se escribe onClick
 // A diferencia de HTML y JS, donde se coloca el nombre de la función en un string en React se utiliza la función entre llaves
 
-function App() {
+// Hooks Personalizados
+// Son funciones que permiten encapsular la lógica de un componente y reutilizarla en otros componentes
+// Otra ventaja es la de organizar el código, ya que el hook se encarga de toda la lógica y el componente solo se encarga de renderizar la vista
+// Los hooks deben comenzar con la palabra use, para que React los reconozca como hooks
 
+function App() {
     // Crear useState
     // const [auth, setAuth] = useState(false)
     // const [total, setTotal] = useState(0)
@@ -78,85 +82,12 @@ function App() {
     //     setAuth(true)
     // }, 2000)
 
-    // Obtener datos de la base de datos
-    const [data] = useState(db)
-    // useEffect(() => {
-    //     setData(db)
-    // }, [])
 
-    // State para el carrito
-    const initialCart = () => {
-        const localStorageCart = localStorage.getItem("cart")
-        return localStorageCart ? JSON.parse(localStorageCart) : []
-    }
-    const [cart, setCart] = useState(initialCart)
-
-    useEffect(() => {
-        // Guardar en el local storage
-        localStorage.setItem("cart", JSON.stringify(cart))
-    }, [cart])
-
-    function addToCart(item){
-        const itemExists = cart.findIndex(guitar => guitar.id === item.id)
-        // console.log(itemExists)
-        if (itemExists >= 0) {
-            // Si existe, no se agrega al carrito, se aumenta la cantidad
-            if (cart[itemExists].quantity >= 5) return
-            const updatedCart = [...cart]
-            updatedCart[itemExists].quantity ++
-            setCart(updatedCart)
-            console.log("Ya existe en el carrito")
-        } else {
-            // Se agrega la propiedad quantity al objeto
-            item.quantity = 1
-            // Si no existe, se agrega al carrito
-            console.log("No existe... agregando al carrito...")
-            // setCart(prevCart => [...prevCart, item])
-            setCart([...cart, item])
-        }
-
-        // Se ejecuta antes de que el state se actualice ya que este asíncrono
-        // saveLocalStorage()
-    }
-
-    function removeFromCart(id){
-        // console.log('Eliminando', id)
-        setCart(prevCart => prevCart.filter(item => item.id !== id))
-    }
-
-    function increaseQuantity(id){
-        const updatedCart = cart.map(item => {
-            if(item.id === id && item.quantity < 5){
-                return {
-                    ...item,
-                    quantity: item.quantity + 1
-                }
-            }
-            return item
-        })
-        setCart(updatedCart)
-    }
-
-    function decreaseQuantity(id){
-        const updatedCart = cart.map(item => {
-            if(item.id === id && item.quantity > 1){
-                return {
-                    ...item,
-                    quantity: item.quantity - 1
-                }
-            }
-            return item
-        })
-        setCart(updatedCart)
-    }
-
-    function clearCart(){
-        setCart([])
-    }
-
-    // function saveLocalStorage() {
-    //     localStorage.setItem("cart", JSON.stringify(cart))
-    // }
+    // Hook personalizado
+    const {data, cart, addToCart, removeFromCart, increaseQuantity, decreaseQuantity, clearCart, isEmpty, cartTotal} = useCart()
+    // Recuperar el valor de auth
+    // const { auth, cart } = useCart()
+    // console.log(cart)
 
     return (
         <>
@@ -167,6 +98,8 @@ function App() {
             increaseQuantity = {increaseQuantity}
             decreaseQuantity = {decreaseQuantity}
             clearCart = {clearCart}
+            isEmpty = {isEmpty}
+            cartTotal = {cartTotal}
         />
     
         <main className="container-xl mt-5">

@@ -1,11 +1,11 @@
-import { Fragment } from "react"
-// Importar useMemo
-import { useMemo } from "react"
+// import { Fragment } from "react"
+// // Importar useMemo
+// import { useMemo } from "react"
 // useMemo es un hook que permite memorizar el resultado de una función y mejorar el rendimiento de la aplicación
 // Se usa para evitar cálculos innecesarios
 
 // Creación de un componente Header
-export default function Header({cart, removeFromCart, increaseQuantity, decreaseQuantity, clearCart}) { // Destructuring de los parámetros en la función
+export default function Header({cart, removeFromCart, increaseQuantity, decreaseQuantity, clearCart, isEmpty, cartTotal}) { // Destructuring de los parámetros en la función
     // JSX
     // Es un lenguaje de plantillas que muestra HTML pero tiene la capacidad de usar JS
     // Permite usar variables, funciones, etc.
@@ -14,10 +14,6 @@ export default function Header({cart, removeFromCart, increaseQuantity, decrease
     // State Derivado
     // const isEmpty = () => cart.length === 0
     // const cartTotal = () => cart.reduce((total, item) => total + (item.quantity * item.price), 0)
-
-    // useMemo
-    const isEmpty = useMemo(() => cart.length === 0, [cart])
-    const cartTotal = useMemo(() => cart.reduce((total, item) => total + (item.quantity * item.price), 0), [cart])
 
     return (
         // Para usar elementos de JS en HTML se usa {}
