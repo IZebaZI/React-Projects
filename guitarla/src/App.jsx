@@ -85,7 +85,16 @@ function App() {
     // }, [])
 
     // State para el carrito
-    const [cart, setCart] = useState([])
+    const initialCart = () => {
+        const localStorageCart = localStorage.getItem("cart")
+        return localStorageCart ? JSON.parse(localStorageCart) : []
+    }
+    const [cart, setCart] = useState(initialCart)
+
+    useEffect(() => {
+        // Guardar en el local storage
+        localStorage.setItem("cart", JSON.stringify(cart))
+    }, [cart])
 
     function addToCart(item){
         const itemExists = cart.findIndex(guitar => guitar.id === item.id)
@@ -105,7 +114,9 @@ function App() {
             // setCart(prevCart => [...prevCart, item])
             setCart([...cart, item])
         }
-        
+
+        // Se ejecuta antes de que el state se actualice ya que este asíncrono
+        // saveLocalStorage()
     }
 
     function removeFromCart(id){
@@ -142,6 +153,10 @@ function App() {
     function clearCart(){
         setCart([])
     }
+
+    // function saveLocalStorage() {
+    //     localStorage.setItem("cart", JSON.stringify(cart))
+    // }
 
     return (
         <>
