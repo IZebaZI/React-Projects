@@ -1,5 +1,5 @@
 // Importar Hooks de UseState y UseEffect
-import { use, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 
 // Importar componentes de React
 import Header from "./Components/Header"
@@ -79,7 +79,7 @@ function App() {
     // }, 2000)
 
     // Obtener datos de la base de datos
-    const [data, setData] = useState(db)
+    const [data] = useState(db)
     // useEffect(() => {
     //     setData(db)
     // }, [])
